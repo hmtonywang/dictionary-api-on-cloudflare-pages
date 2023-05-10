@@ -1,9 +1,9 @@
 'use strict';
 
-async function errorHandling ({ next }) {
+async function errorHandling (context) {
   let response;
   try {
-    response = await next();
+    response = await context.next();
   } catch (error) {
     console.error(error);
     const res = JSON.stringify({
@@ -25,17 +25,17 @@ function respondUnauthorized () {
   return new Response(res, { status: 401 });
 }
 
-function authorization ({ request, next }) {
-  const { headers } = request;
+function authorization (context) {
+  const { headers } = context.request;
   const headerTimestamp = headers.get('X-TIMESTAMP');
   const headerSignature = headers.get('X-SIGNATURE');
   if (!headerTimestamp || !headerSignature) {
     return respondUnauthorized();
   }
-  return next();
+  return context.next();
 }
 
 export const onRequestGet = [
   errorHandling,
-  // authorization
+  authorization
 ];
