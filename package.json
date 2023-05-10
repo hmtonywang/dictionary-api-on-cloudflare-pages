@@ -28,6 +28,6 @@
     "wrangler": "^2.19.0"
   },
   "dependencies": {
-    "dictionary-crawler": "github:hmtonywang/dictionary-crawler"
+    "dictionary-crawler": "^0.1.0"
   }
 }

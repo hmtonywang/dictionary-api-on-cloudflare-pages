@@ -1,13 +1,6 @@
 'use strict';
 
-// To surround requiring "dictionary-crawler" with a try/catch block
-// to handle this failure at run-time instead of bundle-time.
-let crawler;
-try {
-  crawler = require('dictionary-crawler');
-} catch (error) {
-  // Do nothing
-}
+const crawler = require('dictionary-crawler');
 
 export async function onRequestGet (context) {
   const { word } = context.params;
